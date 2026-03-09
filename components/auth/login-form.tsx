@@ -22,6 +22,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const loginFormSchema = z.object({
   email: z
@@ -45,6 +46,8 @@ export function LoginForm() {
       password: "",
     },
   });
+
+  const tAuth = useTranslations("auth");
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
@@ -81,14 +84,14 @@ export function LoginForm() {
           <div className="hidden lg:flex w-full lg:w-[45%] bg-primary text-white flex-col justify-center items-center rounded-t-2xl lg:rounded-tr-[100px] lg:rounded-br-[100px] lg:rounded-tl-2xl lg:rounded-bl-2xl py-8 lg:py-0">
             <div className="text-center">
               <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F5EDE2] mb-4">
-                Welcome Back!
+                {tAuth("welcomeBack")}
               </h3>
               <p className="text-base sm:text-lg lg:text-xl font-semibold text-[#F5EDE2] mb-6">
-                Don&apos;t have an account?
+                {tAuth("donthaveAcc")}
               </p>
               <Link href="/auth/signup">
                 <Button className="px-8 py-3 border border-[#F5EDE2] text-base font-semibold hover:bg-[#F5EDE2] hover:text-primary">
-                  Register
+                  {tAuth("register")}
                 </Button>
               </Link>
             </div>
@@ -97,7 +100,7 @@ export function LoginForm() {
           <div className="flex flex-col justify-center w-full lg:w-[55%] py-8 px-4 sm:px-6 lg:px-10">
             <div className="w-full max-w-md mx-auto space-y-6">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary text-center">
-                Login
+                {tAuth("signIn")}
               </h2>
 
               <Form {...form}>
@@ -111,12 +114,12 @@ export function LoginForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm sm:text-base">
-                          Email
+                          {tAuth("email")}
                         </FormLabel>
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="Enter your email"
+                            placeholder={`${tAuth("enterEmail")}`}
                             {...field}
                             className="h-10 sm:h-12 text-sm sm:text-base"
                           />
@@ -132,13 +135,13 @@ export function LoginForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm sm:text-base">
-                          Password
+                          {tAuth("password")}
                         </FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Input
                               type={showPassword ? "text" : "password"}
-                              placeholder="Enter your password"
+                              placeholder={`${tAuth("enterPassword")}`}
                               {...field}
                               className="h-10 sm:h-12 text-sm sm:text-base"
                             />
@@ -165,7 +168,7 @@ export function LoginForm() {
                       href="/forgot-password"
                       className="text-xs sm:text-sm text-[#0a1155] hover:underline"
                     >
-                      Forgot password?
+                      {tAuth("forgotPassword")}
                     </Link>
                   </div>
 
@@ -174,7 +177,7 @@ export function LoginForm() {
                     disabled={isLoading}
                     className="w-full h-10 sm:h-12 bg-primary hover:bg-primary/90 text-sm sm:text-base font-bold text-white cursor-pointer"
                   >
-                    {isLoading ? "Logging in..." : "Log In"}
+                    {isLoading ? "Logging in..." : tAuth("signIn")}
                   </Button>
                 </form>
               </Form>
@@ -182,14 +185,14 @@ export function LoginForm() {
               {/* Mobile-only Register Link */}
               <div className="lg:hidden text-center mt-4">
                 <p className="text-sm text-primary mb-2">
-                  Don&apos;t have an account?
+                  {tAuth("donthaveAcc")}
                 </p>
                 <Link href="/signup">
                   <Button
                     variant="outline"
                     className="px-6 py-2 border-primary text-primary hover:bg-primary hover:text-white text-sm cursor-pointer"
                   >
-                    Register
+                    {tAuth("register")}
                   </Button>
                 </Link>
               </div>

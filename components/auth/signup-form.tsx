@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const registerFormSchema = z.object({
   fullname: z.string().min(2, {
@@ -25,9 +26,6 @@ const registerFormSchema = z.object({
   }),
   email: z.string().email({
     message: "Please enter a valid email address.",
-  }),
-  mobile: z.string().min(10, {
-    message: "Mobile number must be at least 10 characters.",
   }),
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
@@ -47,7 +45,6 @@ export function RegisterForm() {
       fullname: "",
       email: "",
       password: "",
-      mobile: "",
     },
   });
 
@@ -79,6 +76,8 @@ export function RegisterForm() {
     setIsLoading(false);
   }
 
+  const tAuth = useTranslations("auth");
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-background">
       <div className="container mx-auto">
@@ -86,7 +85,7 @@ export function RegisterForm() {
           <div className="flex flex-col justify-center w-full lg:w-1/2 px-4 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12">
             <div className="space-y-2 text-center">
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary">
-                Registration
+                {tAuth("registration")}
               </h1>
             </div>
 
@@ -101,12 +100,12 @@ export function RegisterForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm sm:text-base">
-                        Full Name
+                        {tAuth("fullName")}
                       </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Enter your full name"
+                          placeholder={tAuth("enterFullName")}
                           disabled={isLoading}
                           className="h-10 sm:h-12 rounded-md text-sm sm:text-base"
                         />
@@ -122,35 +121,13 @@ export function RegisterForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm sm:text-base">
-                        Email address
+                        {tAuth("email")}
                       </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           type="email"
-                          placeholder="Enter your email"
-                          disabled={isLoading}
-                          className="h-10 sm:h-12 rounded-md text-sm sm:text-base"
-                        />
-                      </FormControl>
-                      <FormMessage className="text-xs sm:text-sm" />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="mobile"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm sm:text-base">
-                        Mobile Number
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          type="text"
-                          placeholder="Enter your mobile number"
+                          placeholder={`${tAuth("enterEmail")}`}
                           disabled={isLoading}
                           className="h-10 sm:h-12 rounded-md text-sm sm:text-base"
                         />
@@ -166,13 +143,13 @@ export function RegisterForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm sm:text-base">
-                        Password
+                        {tAuth("password")}
                       </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           type="password"
-                          placeholder="Create a password"
+                          placeholder={`${tAuth("createPassword")}`}
                           disabled={isLoading}
                           className="h-10 sm:h-12 rounded-md text-sm sm:text-base"
                         />
@@ -186,7 +163,7 @@ export function RegisterForm() {
                   disabled={isLoading}
                   className="w-full h-10 sm:h-12 bg-primary hover:bg-primary/90 text-sm sm:text-base font-semibold text-white rounded-md"
                 >
-                  {isLoading ? "Loading" : "Register"}
+                  {isLoading ? "Loading" : `${tAuth("register")}`}
                 </Button>
               </form>
             </Form>
@@ -194,7 +171,7 @@ export function RegisterForm() {
             <div className="mt-4 text-center block md:hidden">
               <Link href="/login">
                 <Button className="px-6 py-2 sm:px-8 sm:py-3 border border-primary/20 text-sm sm:text-base font-semibold text-white hover:bg-primary/20  rounded-md">
-                  Login
+                  {tAuth("signIn")}
                 </Button>
               </Link>
             </div>
@@ -203,14 +180,14 @@ export function RegisterForm() {
           <div className="hidden lg:flex w-full lg:w-[45%] bg-primary text-white flex-col justify-center items-center rounded-t-2xl lg:rounded-tl-[100px] lg:rounded-bl-[100px] lg:rounded-tr-2xl lg:rounded-br-2xl py-8">
             <div className="text-center px-6">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-                Welcome Back!
+                {tAuth("welcomeBack")}
               </h3>
               <p className="text-sm sm:text-base lg:text-lg font-medium text-white mb-6">
-                Already have an account? Log in to continue.
+                {tAuth("haveAcc")}
               </p>
               <Link href="/auth/login">
                 <Button className="px-6 py-2 sm:px-8 sm:py-3 border border-white text-sm sm:text-base font-semibold  hover:bg-white hover:text-primary text-white rounded-md">
-                  Login
+                  {tAuth("signIn")}
                 </Button>
               </Link>
             </div>

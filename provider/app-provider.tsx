@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
 import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 
 export default function AppProvider({
   children,
@@ -14,8 +15,9 @@ export default function AppProvider({
   const queryClient = new QueryClient();
 
   const pathname = usePathname();
+  const currentLocale = useLocale();
 
-  const hideNavAndFooter = ["/auth/login", "/auth/signup"];
+  const hideNavAndFooter = [`/${currentLocale}/auth/login`, `/${currentLocale}/auth/signup`]
 
   return (
     <QueryClientProvider client={queryClient}>
