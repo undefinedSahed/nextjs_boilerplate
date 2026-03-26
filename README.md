@@ -1,10 +1,10 @@
-# Next.js 16 Advanced Boilerplate
+# Next.js 15 Advanced Boilerplate
 
-A production-ready, feature-rich boilerplate built with Next.js 16 App Router. This template is designed to significantly reduce setup time for modern web applications by pre-configuring essential modules for authentication, data fetching, internationalization, form handling, and beautiful UI components.
+A production-ready, feature-rich boilerplate built with Next.js 15 (App Router) & React 19. This template is designed to significantly reduce setup time for modern web applications by pre-configuring essential modules for authentication, data fetching, internationalization, form handling, UI components, and strict code quality tools.
 
 ## 🚀 Features Included
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router) & React 19
 - **Language**: [TypeScript](https://www.typescriptlang.org/) for robust static typing.
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) & `tw-animate-css` for rapid, responsive UI development.
 - **UI Components**: [shadcn/ui](https://ui.shadcn.com/) (built on Radix UI) with pre-installed primitives (Button, Card, Form, Input, Navigation Menu, Sheet, etc.).
@@ -14,7 +14,11 @@ A production-ready, feature-rich boilerplate built with Next.js 16 App Router. T
 - **Authentication**: [NextAuth.js v4](https://next-auth.js.org/) pre-configured with UI forms for Login and Signup.
 - **Internationalization (i18n)**: [next-intl](https://next-intl-docs.vercel.app/) setup with dynamic routing. Currently supports English (`en`) and Bengali (`bn`).
 - **Notifications**: [Sonner](https://sonner.emilkowal.ski/) for elegant toast notifications.
-- **Code Quality**: Pre-configured ESLint and Prettier.
+- **Code Quality & Workflow**:
+  - **ESLint** (v9) & Prettier for code formatting and standard checking.
+  - **Husky** for automatic Git hooks management.
+  - **lint-staged** runs linting & fixes strictly on staged files.
+  - **Commitlint** to strictly enforce conventional commit messages.
 
 ## 📁 Project Structure
 
@@ -65,6 +69,19 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. The application will immediately redirect you to the default locale route (e.g., `/en`).
+
+## ⚙️ Development Workflow
+
+### Committing Changes
+
+This boilerplate enforces **Conventional Commits** using Husky and Commitlint. Before a commit is finalized, `lint-staged` will automatically run formatting and linting on your staged files.
+
+Example of a valid commit message:
+```bash
+git commit -m "feat: add user profile component"
+git commit -m "fix: resolve login form hydration error"
+```
+If you provide an invalid commit message, the commit will be rejected.
 
 ## ⚙️ How to Customize and Extend
 
