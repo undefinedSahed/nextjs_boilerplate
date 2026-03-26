@@ -1,36 +1,18 @@
 import Link from "next/link";
-import { Command, Github, Twitter, Youtube } from "lucide-react";
+import { Command } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
-
-const footerLinks = {
-  product: [
-    { name: "Features", href: "/#features" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Documentation", href: "/docs" },
-    { name: "Guides", href: "/guides" },
-  ],
-  company: [
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "Careers", href: "/careers" },
-    { name: "Contact", href: "/contact" },
-  ],
-  legal: [
-    { name: "Privacy", href: "/privacy" },
-    { name: "Terms", href: "/terms" },
-    { name: "Cookie Policy", href: "/cookies" },
-  ],
-};
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const tFooter = useTranslations("footer");
 
-  const socialLinks = tFooter.raw("social") as Array<{ name: string; href: string }>;
-
+  const socialLinks = tFooter.raw("social") as Array<{
+    name: string;
+    href: string;
+  }>;
 
   return (
     <footer className="border-t bg-background">
@@ -70,7 +52,12 @@ export function Footer() {
               <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground/70">
                 {tFooter("sections.product")}
               </h4>
-              {(tFooter.raw("links.product") as Array<{ name: string; href: string }>).map((link) => (
+              {(
+                tFooter.raw("links.product") as Array<{
+                  name: string;
+                  href: string;
+                }>
+              ).map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
@@ -84,7 +71,12 @@ export function Footer() {
               <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground/70">
                 {tFooter("sections.company")}
               </h4>
-              {(tFooter.raw("links.company") as Array<{ name: string; href: string }>).map((link) => (
+              {(
+                tFooter.raw("links.company") as Array<{
+                  name: string;
+                  href: string;
+                }>
+              ).map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
@@ -98,7 +90,12 @@ export function Footer() {
               <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground/70">
                 {tFooter("sections.legal")}
               </h4>
-              {(tFooter.raw("links.legal") as Array<{ name: string; href: string }>).map((link) => (
+              {(
+                tFooter.raw("links.legal") as Array<{
+                  name: string;
+                  href: string;
+                }>
+              ).map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
@@ -117,7 +114,6 @@ export function Footer() {
             {tFooter("copyright", { year: currentYear })}
           </p>
           <div className="flex items-center gap-4">
-
             {socialLinks.map((link) => (
               <Link
                 key={link.name}
